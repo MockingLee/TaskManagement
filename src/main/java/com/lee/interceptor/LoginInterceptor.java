@@ -3,8 +3,9 @@ package com.lee.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
+@Component
 public class LoginInterceptor implements HandlerInterceptor {
 	
 	@Override
@@ -13,6 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object loginName = request.getSession().getAttribute("loginName");
         if (null == loginName || !(loginName instanceof String)) {
             // 未登录，重定向到登录页
+        	System.out.println("用户未登录");
             response.sendRedirect("/");
             return false;
         }
