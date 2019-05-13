@@ -82,13 +82,13 @@ public class TaskDao {
     }
 
     public static boolean deleteTask(int task_id) {
-        String sql = "select * from Task where user_id = ?";
+        String sql = "select * from Task where task_id = ?";
         Object[] args = {task_id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
         if (list == null) {
             return false;
         } else {
-            sql = "delete from Task where user_id = ?";
+            sql = "delete from Task where task_id = ?";
             jdbcTemplate.update(sql, args);
             return true;
         }
