@@ -2,19 +2,22 @@ package com.Picasso.dao;
 
 import com.Picasso.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-@Service
+
+@Configuration
+@Repository
 public class UserDao {
     @Autowired
-    private static JdbcTemplate jdbcTemplate;
-    
+    private JdbcTemplate jdbcTemplate;
 
-    public static ArrayList<User> findAllUser() {
+    public ArrayList<User> findAllUser() {
         String sql = "select * from User";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         ArrayList<User> users = new ArrayList<>();
@@ -28,8 +31,7 @@ public class UserDao {
         return users;
     }
 
-    public static User findUser(String name, String pwd) {
-    	
+    public User findUser(String name, String pwd) {
         String sql = "select * from User where username = ? and passwd = ?";
         Object[] args = {name, pwd};
         System.out.println(jdbcTemplate);
@@ -40,7 +42,7 @@ public class UserDao {
         return null;
     }
 
-    public static boolean checkPwd(String name, String pwd) {
+    public boolean checkPwd(String name, String pwd) {
         if (findUser(name, pwd) == null) {
             return false;
         } else {
@@ -48,7 +50,7 @@ public class UserDao {
         }
     }
 
-    public static boolean updateUser(String old_id, String old_pwd, String new_id, String new_pwd) {
+    public boolean updateUser(String old_id, String old_pwd, String new_id, String new_pwd) {
         if (!checkPwd(old_id, old_pwd)) {
             return false;
         } else {
@@ -59,7 +61,7 @@ public class UserDao {
         }
     }
 
-    public static boolean insertUser(String id, String pwd) {
+    public boolean insertUser(String id, String pwd) {
         String sql = "select * from User where username = ?";
         Object[] args = {id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
@@ -75,7 +77,7 @@ public class UserDao {
         }
     }
 
-    public static boolean deleteUser(String id) {
+    public boolean deleteUser(String id) {
         String sql = "select * from User where username = ?";
         Object[] args = {id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
