@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.Picasso.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TaskManagementApplicationTests {
+public class DaoTest {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -22,7 +22,7 @@ public class TaskManagementApplicationTests {
 		
 		String id = "dzb";
         String pwd = "123";
-        String sql = "select * from User where username = " + id;
+        String sql = "select * from 'User' where username = " + id;
         System.out.println(jdbcTemplate);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 
