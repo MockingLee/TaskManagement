@@ -32,9 +32,8 @@ public class HashProtection {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(sha1("askdsadasdasdsadsaadasd") + " " + sha1("askdsadasdasdsadsaadasd").length());
-		System.out.println(sha1("123213asdsa") + " " + sha1("123213asdsa").length());
-		System.out.println(sha1("934fe5f2f3cee0da0595bddd4b12c80302aa75631231") + " " + sha1("934fe5f2f3cee0da0595bddd4b12c80302aa75631231").length());
+		System.out.println(sha1("123") + " " + sha1("123").length());
+		
 	}
 
 }

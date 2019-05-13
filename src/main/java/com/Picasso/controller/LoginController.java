@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.Picasso.dao.UserDao;
+import com.Picasso.util.HashProtection;
 import com.Picasso.util.IdentifierString;
 
 @Controller
@@ -54,7 +55,7 @@ public class LoginController {
 
         UserDao userDao = ctx.getBean(UserDao.class);
 
-        if (userDao.checkPwd(username,password)) {
+        if (userDao.checkPwd(username,HashProtection.sha1(password))) {
         	request.getSession().setAttribute("loginState", IdentifierString.LOGIN_STATE_LOGIN);
         	request.getSession().setAttribute("userType", IdentifierString.USER_TYPE_USER);
         	request.getSession().setAttribute("loginName", username);
@@ -82,9 +83,9 @@ public class LoginController {
         if (null == username || null == password) {
             return "redirect:/";
         }
-        
+        UserDao userDao = ctx.getBean(UserDao.class);
     
-        if (password.equals(rightPassword) && username.equals(rightUserName)) {
+        if (userDao.checkPwd(username,HashProtection.sha1(password))) {
         	request.getSession().setAttribute("loginState", IdentifierString.LOGIN_STATE_LOGIN);
         	request.getSession().setAttribute("userType", IdentifierString.USER_TYPE_AD);
         	request.getSession().setAttribute("loginName", username);           
