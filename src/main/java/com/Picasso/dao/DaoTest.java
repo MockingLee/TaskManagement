@@ -32,12 +32,12 @@ public class DaoTest {
 //        Object args[] = {id,pwd};
 ////        jdbcTemplate.update(sql,args);
 
-//        int task_id = 300000;
-//        String sql = "select * from Task where task_id = ?";
-//        Object args[] = {task_id};
-//        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql,args);
-//        Date time = (Date)list.get(0).get("init_time");
-//        System.out.println(time.toString());
+        int task_id = 300000;
+        String sql = "select * from Task where task_id = ?";
+        Object args[] = {task_id};
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql,args);
+        Date time = (Date)list.get(0).get("init_time");
+        System.out.println(time.toString());
 
 //        //插入任务
 //        int user_id = 100001;

@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class UserDao {
     @Autowired
     private static JdbcTemplate jdbcTemplate;
+    
 
     public static ArrayList<User> findAllUser() {
         String sql = "select * from User";
@@ -28,8 +29,10 @@ public class UserDao {
     }
 
     public static User findUser(String name, String pwd) {
+    	
         String sql = "select * from User where username = ? and passwd = ?";
         Object[] args = {name, pwd};
+        System.out.println(jdbcTemplate);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
         if (list != null) {
             return new User(name, pwd);
