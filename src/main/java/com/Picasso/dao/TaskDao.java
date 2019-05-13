@@ -2,7 +2,9 @@ package com.Picasso.dao;
 
 import com.Picasso.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,13 +12,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Configuration
+@Repository
 public class TaskDao {
     @Autowired
-    private static JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static ArrayList<Task> findAllTasks(String id) {
+    public ArrayList<Task> findAllTasks(String id) {
         String sql = "select * from User INNER JOIN user_task INNER JOIN Task where User.user_id = user_task.user_id and user_task.task_id = Task.task_id and User.user_id = ?";
         Object[] args = {id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
@@ -36,7 +40,7 @@ public class TaskDao {
         return tasks;
     }
 
-    public static Task findTask(int id) {
+    public Task findTask(int id) {
         String sql = "select * from Task where task_id = ?";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         if (list != null && list.size() == 1) {
@@ -46,7 +50,7 @@ public class TaskDao {
         return null;
     }
 
-    public static boolean updateTask(int task_id, String title, String content, Date init_time, Date update_time, int process) {
+    public boolean updateTask(int task_id, String title, String content, Date init_time, Date update_time, int process) {
         if (findTask(task_id) == null) {
             return false;
         } else {
@@ -57,7 +61,7 @@ public class TaskDao {
         }
     }
 
-    public static boolean insertTask(int user_id, String title, String content, Date init_time, Date update_time, int process) {
+    public boolean insertTask(int user_id, String title, String content, Date init_time, Date update_time, int process) {
         String sql = "select * from User where user_id = ?";
         Object[] args = {user_id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
@@ -81,7 +85,7 @@ public class TaskDao {
         }
     }
 
-    public static boolean deleteTask(int task_id) {
+    public boolean deleteTask(int task_id) {
         String sql = "select * from Task where task_id = ?";
         Object[] args = {task_id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);

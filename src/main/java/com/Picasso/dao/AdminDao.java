@@ -2,17 +2,21 @@ package com.Picasso.dao;
 
 import com.Picasso.entity.Administrator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Configuration
+@Repository
 public class AdminDao {
     @Autowired
-    private static JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    public static ArrayList<Administrator> findAllAdministrator() {
+    public ArrayList<Administrator> findAllAdministrator() {
         String sql = "select * from Administrator";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
         ArrayList<Administrator> Administrators = new ArrayList<>();
@@ -26,7 +30,7 @@ public class AdminDao {
         return Administrators;
     }
 
-    public static Administrator findAdministrator(String name, String pwd) {
+    public Administrator findAdministrator(String name, String pwd) {
         String sql = "select * from Administrator where username = ? and passwd = ?";
         Object[] args = {name, pwd};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
@@ -36,7 +40,7 @@ public class AdminDao {
         return null;
     }
 
-    public static boolean checkPwd(String id, String pwd) {
+    public boolean checkPwd(String id, String pwd) {
         if (findAdministrator(id, pwd) == null) {
             return false;
         } else {
@@ -44,7 +48,7 @@ public class AdminDao {
         }
     }
 
-    public static boolean updateAdministrator(String old_id, String old_pwd, String new_id, String new_pwd) {
+    public boolean updateAdministrator(String old_id, String old_pwd, String new_id, String new_pwd) {
         if (!checkPwd(old_id, old_pwd)) {
             return false;
         } else {
@@ -55,7 +59,7 @@ public class AdminDao {
         }
     }
 
-    public static boolean insertAdministrator(String id, String pwd) {
+    public boolean insertAdministrator(String id, String pwd) {
         String sql = "select * from Administrator where username = ?";
         Object[] args = {id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
@@ -71,7 +75,7 @@ public class AdminDao {
         }
     }
 
-    public static boolean deleteAdministrator(String id) {
+    public boolean deleteAdministrator(String id) {
         String sql = "select * from Administrator where username = ?";
         Object[] args = {id};
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, args);
