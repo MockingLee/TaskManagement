@@ -52,6 +52,8 @@ public class UserService {
      */
     public boolean createAccount(String username, String passwd) {
         if (accountDao.findAccountByName(username, passwd) == null) {
+            if(username.equals(""))
+                return false;
             accountDao.insertAccount(username, passwd, 0);
             return true;
         } else {
@@ -61,6 +63,8 @@ public class UserService {
 
     public boolean createAccount(String username, String passwd, int weight) {
         if (accountDao.findAccountByName(username, passwd) == null) {
+            if(username.equals(""))
+                return false;
             accountDao.insertAccount(username, passwd, weight);
             return true;
         } else {
