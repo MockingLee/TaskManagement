@@ -1,23 +1,18 @@
 package com.Picasso.entity;
 
-/***
- * 
- * @author 18140
- *	Task 实体  
- */
 
 import java.util.Date;
 
 public class Task {
-    private int task_id;
-    private String title;
-    private String content;
-    private Date init_time;
-    private Date update_time;
-    private int process;
+    private int tid;//任务id
+    private String title;//任务标题
+    private String content;//任务内容
+    private Date init_time;//初始时间
+    private Date update_time;//最近更新时间
+    private int process;//当前进度 1~100
 
     public Task(int task_id, String title, String content, Date init_time, Date update_time, int process) {
-        this.task_id = task_id;
+        this.tid = task_id;
         this.title = title;
         this.content = content;
         this.init_time = init_time;
@@ -26,11 +21,11 @@ public class Task {
     }
 
     public int getTask_id() {
-        return task_id;
+        return tid;
     }
 
     public void setTask_id(int task_id) {
-        this.task_id = task_id;
+        this.tid = task_id;
     }
 
     public String getTitle() {

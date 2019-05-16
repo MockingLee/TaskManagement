@@ -22,11 +22,11 @@ public class TaskManagementApplicationTests {
 		
 		String id = "dzb";
         String pwd = "123";
-        String sql = "select * from User where username = " + id;
+        String sql = "select * from Account where username = " + id;
         System.out.println(jdbcTemplate);
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 
-        sql = "insert into User (username , passwd) values (" + id + ", " + pwd + ")";
+        sql = "insert into Account (username , passwd) values (" + id + ", " + pwd + ")";
         jdbcTemplate.update(sql);
 
 		
