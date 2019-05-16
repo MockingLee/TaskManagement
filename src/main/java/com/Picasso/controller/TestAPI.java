@@ -44,16 +44,32 @@ public class TestAPI {
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
     public Map<String, Object> addAccount(@RequestBody Map<String, Object> info) {
         //{"username":"dzb","passwd":"123"}
-        Account account = (Account) info.get("info");
+        Map<String, Object> account = (Map<String, Object>) info.get("info");
         Map<String, Object> res = new HashMap<>();
-
         Map<String, Object> msg = (Map<String, Object>) info.get("msg");
-        int weight = 0;
-        if (info.get("weight") != null) {
-            weight = (Integer) msg.get("weight");
+        Account acc = null;
+        if ((acc = userService.checkAccount((String) account.get("username"), (String) account.get("passwd"))) != null) {
+            if (acc.getWeight() > 0) {
+                res.put("success", true);
+                res.put("msg", msg);
+                res.put("info", acc);
+                int weight = 0;
+                if (info.get("weight") != null) {
+                    weight = (Integer) msg.get("weight");
+                }
+                System.out.println(weight);
+                boolean flag = userService.createAccount((String) msg.get("username"), (String) msg.get("passwd"), weight);
+                if (!flag) {
+                    res.put("success", false);
+                    res.put("info", acc);
+                    res.put("res", "double");
+                }
+            }
+        } else {
+            res.put("success", false);
+            res.put("info", account);
+            res.put("res","weight");
         }
-        System.out.println(weight);
-//        userService.createAccount((String)msg.get("username"), (String)msg.get("passwd"), weight);
         return res;
     }
 
