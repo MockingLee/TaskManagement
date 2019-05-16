@@ -1,9 +1,11 @@
 package com.Picasso.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.Picasso.entity.Task;
 import com.Picasso.service.TaskService;
 import com.Picasso.service.UserService;
 import org.junit.Test;
@@ -24,7 +26,11 @@ public class DaoTest {
 
     @Test
     public void contextLoads() {
-        System.out.println(taskService.selectAllTask().size());
+        List<Task> tasks = taskService.selectAllTask();
+        SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
+        for(Task task : tasks){
+            System.out.println(task.getTitle() + " " +sdf.format(task.getInit_time()));
+        }
     }
 
 }

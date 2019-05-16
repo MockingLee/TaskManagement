@@ -23,7 +23,11 @@ public class UserService {
      * 查找
      */
     public Account checkAccount(String username, String passwd) {
-        return accountDao.findAccountByName(username, passwd);
+        return accountDao.findAccountByNamePass(username, passwd);
+    }
+
+    public Account findAccountByUserName(String username){
+        return accountDao.findAccountByName(username);
     }
 
     public List<Account> selectAllAccount() {
@@ -39,7 +43,7 @@ public class UserService {
     }
 
     public UserInfo showUserInfo(String username, String passwd) {
-        Account account = accountDao.findAccountByName(username, passwd);
+        Account account = accountDao.findAccountByNamePass(username, passwd);
         return userInfoDao.findUserById(account.getUid());
     }
 
@@ -51,7 +55,7 @@ public class UserService {
      * 插入修改
      */
     public boolean createAccount(String username, String passwd) {
-        if (accountDao.findAccountByName(username, passwd) == null) {
+        if (accountDao.findAccountByName(username) == null) {
             if(username.equals(""))
                 return false;
             accountDao.insertAccount(username, passwd, 0);
@@ -62,7 +66,7 @@ public class UserService {
     }
 
     public boolean createAccount(String username, String passwd, int weight) {
-        if (accountDao.findAccountByName(username, passwd) == null) {
+        if (accountDao.findAccountByName(username) == null) {
             if(username.equals(""))
                 return false;
             accountDao.insertAccount(username, passwd, weight);
@@ -81,11 +85,12 @@ public class UserService {
         return userInfoDao.findUserById(uid);
     }
 
+    @Transactional
     public Account changePasswd(String username, String passwd, String newwd) {
         Account account = this.checkAccount(username, passwd);
         if (account != null) {
             accountDao.updateAccount(username, newwd, account.getWeight(), account.getUid());
-            return accountDao.findAccountByName(username, newwd);
+            return accountDao.findAccountByNamePass(username, newwd);
         } else {
             return null;
         }

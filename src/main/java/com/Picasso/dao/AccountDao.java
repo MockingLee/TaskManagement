@@ -10,8 +10,11 @@ public interface AccountDao {
     @Select("SELECT * FROM account WHERE uid = #{uid}")
     Account findAccountById(@Param("uid") int uid);
 
+    @Select("SELECT * FROM account WHERE username = #{username}")
+    Account findAccountByName(@Param("username") String username);
+
     @Select("SELECT * FROM account WHERE username = #{username} and passwd = #{passwd}")
-    Account findAccountByName(@Param("username") String username, @Param("passwd") String passwd);
+    Account findAccountByNamePass(@Param("username") String username, @Param("passwd") String passwd);
 
     @Select("SELECT * FROM account")
     List<Account> findAllAccount();
