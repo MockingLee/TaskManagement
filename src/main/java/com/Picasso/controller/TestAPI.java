@@ -26,29 +26,30 @@ public class TestAPI {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String, Object> doLogin(@RequestBody Map<String, Object> info) {
-        //{"username":"dzb","passwd":"123"}
+        // {"username":"dzb","passwd":"123"}
         String username = (String) info.get("username");
-        String passwd = (String) info.get("passwd");
+        String passwd = (String) info.get("password");
+        System.out.println(username + " " + passwd);
         Account account = userService.checkAccount(username, passwd);
         Map<String, Object> map = new HashMap<>();
         if (account != null) {
             map.put("success", true);
             map.put("info", account);
         } else {
-            map.put("secess", false);
+            map.put("success", false);
         }
         return map;
     }
 
-
     @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
     public Map<String, Object> addAccount(@RequestBody Map<String, Object> info) {
-        //{"username":"dzb","passwd":"123"}
+        // {"username":"dzb","passwd":"123"}
         Map<String, Object> account = (Map<String, Object>) info.get("info");
         Map<String, Object> res = new HashMap<>();
         Map<String, Object> msg = (Map<String, Object>) info.get("msg");
         Account acc = null;
-        if ((acc = userService.checkAccount((String) account.get("username"), (String) account.get("passwd"))) != null) {
+        if ((acc = userService.checkAccount((String) account.get("username"),
+                (String) account.get("passwd"))) != null) {
             if (acc.getWeight() > 0) {
                 res.put("success", true);
                 res.put("msg", msg);
@@ -58,7 +59,8 @@ public class TestAPI {
                     weight = (Integer) msg.get("weight");
                 }
                 System.out.println(weight);
-                boolean flag = userService.createAccount((String) msg.get("username"), (String) msg.get("passwd"), weight);
+                boolean flag = userService.createAccount((String) msg.get("username"), (String) msg.get("passwd"),
+                        weight);
                 if (!flag) {
                     res.put("success", false);
                     res.put("info", acc);
@@ -68,10 +70,9 @@ public class TestAPI {
         } else {
             res.put("success", false);
             res.put("info", account);
-            res.put("res","weight");
+            res.put("res", "weight");
         }
         return res;
     }
-
 
 }
