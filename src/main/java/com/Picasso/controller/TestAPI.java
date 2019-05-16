@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -24,28 +25,37 @@ public class TestAPI {
     private TaskService taskService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Account doLogin(@RequestBody Map<String, Object> info) {
+    public Map<String, Object> doLogin(@RequestBody Map<String, Object> info) {
         //{"username":"dzb","passwd":"123"}
         String username = (String) info.get("username");
         String passwd = (String) info.get("passwd");
-        return userService.checkAccount(username, passwd);
+        Account account = userService.checkAccount(username, passwd);
+        Map<String, Object> map = new HashMap<>();
+        if (account != null) {
+            map.put("success", true);
+            map.put("info", account);
+        } else {
+            map.put("secess", false);
+        }
+        return map;
     }
 
 
-    @RequestMapping(value = "/addAcount", method = RequestMethod.POST)
-    public boolean addAcount(@RequestBody Map<String, Object> info) {
+    @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
+    public Map<String, Object> addAccount(@RequestBody Map<String, Object> info) {
         //{"username":"dzb","passwd":"123"}
-        String username = (String) info.get("username");
-        String passwd = (String) info.get("passwd");
+        Account account = (Account) info.get("info");
+        Map<String, Object> res = new HashMap<>();
+
+        Map<String, Object> msg = (Map<String, Object>) info.get("msg");
         int weight = 0;
         if (info.get("weight") != null) {
-            weight = (Integer) info.get("weight");
+            weight = (Integer) msg.get("weight");
         }
         System.out.println(weight);
-        return userService.createAccount(username, passwd, weight);
+//        userService.createAccount((String)msg.get("username"), (String)msg.get("passwd"), weight);
+        return res;
     }
-
-
 
 
 }
