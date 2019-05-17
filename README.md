@@ -296,7 +296,7 @@ Field | Description
 }
 ```
 
-`/api/getUserAllTask`
+`/api/getUsers`
 
 查找所有用户信息
 
