@@ -4,6 +4,10 @@
 
 ![ER RelationShip](https://github.com/MockingLee/TaskManagement/raw/master/ReadMeResource/1256484947.jpg "ER RelationShip")
 
+## 系统架构图
+
+![structure](https://github.com/MockingLee/TaskManagement/raw/master/ReadMeResource/架构图.png "structure")
+
 ## API 设计
 `/api/login`
 
