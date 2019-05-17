@@ -3,7 +3,7 @@
 ## ER Relationship
 
 ```
-https://github.com/MockingLee/TaskManagement/blob/master/src/ReadMeResource/webwxgetmsgimg.jpg
+https://github.com/MockingLee/TaskManagement/blob/master/ReadMeResource/webwxgetmsgimg.jpg
 ```
 ## API 设计
 `/api/login`
