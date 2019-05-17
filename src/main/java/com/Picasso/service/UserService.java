@@ -96,6 +96,16 @@ public class UserService {
         }
     }
 
+    public Account changPass(int uid,String newPass){
+        Account account = accountDao.findAccountById(uid);
+        if(account != null){
+            accountDao.updateAccount(account.getusername(),account.getPasswd(),account.getWeight(),account.getUid());
+            return accountDao.findAccountById(uid);
+        }else{
+            return null;
+        }
+    }
+
     /**
      * 删除
      */

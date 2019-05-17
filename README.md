@@ -63,7 +63,7 @@ Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
 **msg** | 需要删除的用户信息 ：uid
-**res** | （可选）删除失败的原因 none/weight
+**res** | （可选）删除失败的原因 none/weight/error
 ```javascript
 // 发送格式
 {
@@ -84,7 +84,7 @@ Field | Description
 **info** | 当前登录用户信息，即登录时接受的info字段
 **uid** | 需要更改的用户uid
 **msg** | 新密码信息
-**res** | （可选）删除失败的原因 notfound/weight
+**res** | （可选）失败的原因 notfound/weight
 **islogout** | 是否logout 
 ```javascript
 // 发送格式
@@ -143,7 +143,6 @@ Field | Description
 // 发送格式
 {
   'info' : {uid : "" , username : "dzb", password : "123", weight : 0} ,
-  'uid' : 100007 ,
   'msg' : {  title : "", content : ""}
 }
 // 返回格式
@@ -217,7 +216,7 @@ Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
 **tid** | tid
-**res** | （可选）修改失败的原因 error
+**res** | （可选）失败的原因 error
 ```javascript
 // 发送格式
 {
@@ -245,7 +244,7 @@ Field | Description
 **info** | 当前登录用户信息，即登录时接受的info字段
 **tid** | tid
 **msg** | 返回当前查询的任务信息
-**res** | （可选）修改失败的原因 weight/notfound
+**res** | （可选）失败的原因 weight/notfound
 ```javascript
 // 发送格式
 {
@@ -273,7 +272,7 @@ Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
 **msg** | 返回当前查询的任务信息
-**res** | （可选）修改失败的原因 weight
+**res** | （可选）失败的原因 weight
 ```javascript
 // 发送格式
 {
@@ -304,7 +303,7 @@ Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
 **msg** | 返回当前查询的任务信息
-**res** | （可选）修改失败的原因 weight
+**res** | （可选）失败的原因 weight
 ```javascript
 // 发送格式
 {

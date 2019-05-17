@@ -44,6 +44,10 @@ public class TaskService {
         return taskDao.findTaskById(tid);
     }
 
+    public UserTask selectUserTask(int uid, int tid) {
+        return userTaskDao.findUserTask(uid, tid);
+    }
+
     /**
      * 插入更改
      */
@@ -56,6 +60,16 @@ public class TaskService {
             int tid = taskDao.findMaxId();
             userTaskDao.insertUserTask(uid, tid);
             return this.selectTaskById(tid);
+        }
+    }
+
+    @Transactional
+    public Task changeTask(String title, String content, Date init_time, Date update_time, int process, int tid) {
+        if (this.selectTaskById(tid) != null) {
+            taskDao.updateTask(title, content, init_time, update_time, process, tid);
+            return this.selectTaskById(tid);
+        } else {
+            return null;
         }
     }
 

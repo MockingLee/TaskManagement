@@ -9,8 +9,8 @@ public interface UserTaskDao {
     @Select("SELECT * FROM user_task WHERE uid = #{uid}")
     List<UserTask> findTaskById(@Param("uid") int uid);
 
-    @Select("SELECT * FROM user_task")
-    List<UserTask> findAllTask();
+    @Select("SELECT * FROM user_task where uid = #{uid} and tid = #{tid}")
+    UserTask findUserTask(@Param("uid") int uid, @Param("tid") int tid);
 
     @Insert("INSERT INTO user_task(uid, tid) VALUES(#{uid}, #{tid})")
     void insertUserTask(@Param("uid") int uid, @Param("tid") int tid);
