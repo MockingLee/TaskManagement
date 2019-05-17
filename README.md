@@ -2,7 +2,7 @@
 
 ## ER Relationship
 
-![ER RelationShip](https://github.com/MockingLee/TaskManagement/raw/master/ReadMeResource/webwxgetmsgimg.jpg "ER RelationShip")
+![ER RelationShip](https://github.com/MockingLee/TaskManagement/raw/master/ReadMeResource/1256484947.jpg "ER RelationShip")
 
 ## API 设计
 `/api/login`
