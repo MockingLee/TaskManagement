@@ -19,29 +19,29 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class TestAPI {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TaskService taskService;
+  @Autowired
+  private UserService userService;
+  @Autowired
+  private TaskService taskService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String, Object> doLogin(@RequestBody Map<String, Object> info) {
-        // {"username":"dzb","passwd":"123"}
-        String username = (String) info.get("username");
-        String passwd = (String) info.get("password");
-        System.out.println(username + " " + passwd);
-        Account account = userService.checkAccount(username, passwd);
-        Map<String, Object> map = new HashMap<>();
-        if (account != null) {
-            map.put("success", true);
-            map.put("info", account);
-        } else {
-            map.put("success", false);
-        }
-        return map;
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public Map<String, Object> doLogin(@RequestBody Map<String, Object> info) {
+    // {"username":"dzb","passwd":"123"}
+    String username = (String) info.get("username");
+    String passwd = (String) info.get("password");
+    System.out.println(username + " " + passwd);
+    Account account = userService.checkAccount(username, passwd);
+    Map<String, Object> map = new HashMap<>();
+    if (account != null) {
+      map.put("success", true);
+      map.put("info", account);
+    } else {
+      map.put("success", false);
     }
+    return map;
+  }
 
-    @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
+  @RequestMapping(value = "/addAccount", method = RequestMethod.POST)
     public Map<String, Object> addAccount(@RequestBody Map<String, Object> info) {
         // {"username":"dzb","passwd":"123"}
         Map<String, Object> account = (Map<String, Object>) info.get("info");
@@ -59,7 +59,7 @@ public class TestAPI {
                     weight = (Integer) msg.get("weight");
                 }
                 System.out.println(weight);
-                boolean flag = userService.createAccount((String) msg.get("username"), (String) msg.get("passwd"),
+                boolean flag = userService.createAccount((String) msg.get("username"), ,
                         weight);
                 if (!flag) {
                     res.put("success", false);
