@@ -1,6 +1,7 @@
 # TaskManagement
 ## API 设计
 `/api/login`
+
 Field | Description
 ------|------------
 **username** | 用户名
@@ -21,6 +22,7 @@ Field | Description
 ```
 
 `/api/addAccount`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -47,6 +49,7 @@ Field | Description
 ```
 
 `/api/delAccount`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -66,6 +69,7 @@ Field | Description
 ```
 
 `/api/changePass`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -94,6 +98,7 @@ Field | Description
 ```
 
 `/api/changeInfo`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -119,6 +124,7 @@ Field | Description
 }
 ```
 `/api/addTask`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -144,6 +150,7 @@ Field | Description
 }
 ```
 `/api/updateTask` 
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -170,6 +177,7 @@ Field | Description
 ```
 
 `/api/changeTask`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -195,6 +203,7 @@ Field | Description
 }
 ```
 `/api/delTask`
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -217,9 +226,11 @@ Field | Description
   'res' : 'error'
 }
 ```
+
 `/api/getTask`
 
 根据tid查找单条任务
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -248,6 +259,7 @@ Field | Description
 `/api/getUserAllTask`
 
 根据uid查找当前用户所有任务
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
@@ -278,6 +290,7 @@ Field | Description
 `/api/getUserAllTask`
 
 查找所有用户信息
+
 Field | Description
 ------|------------
 **info** | 当前登录用户信息，即登录时接受的info字段
