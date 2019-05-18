@@ -351,7 +351,12 @@ public class TestAPI {
                 List<Account> accountList = userService.selectAllAccountByWeight(0);
                 List<UserInfo> userInfos = new ArrayList<>();
                 for (Account account1 : accountList) {
-                    userInfos.add(userService.showUserInfo(account1.getUid()));
+                    UserInfo userinfo = userService.showUserInfo(account1.getUid());
+                    if (userinfo != null) {
+                        userInfos.add(userinfo);
+                    } else {
+                        userInfos.add(new UserInfo(account1.getUid(), null, null, null, null, 0, null));
+                    }
                 }
                 response.put("msg", userInfos);
             } else {
