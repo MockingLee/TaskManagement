@@ -207,7 +207,7 @@ public class TestAPI {
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (taskService.selectUserTask(account.getUid(), tid) != null) {
-        int process = Integer.valueOf((String) msg.get("process"));
+        int process = Integer.valueOf(msg.get("process").toString());
         Date update_time = new Date();
         Task task = taskService.selectTaskById(tid);
         if (task != null) {
