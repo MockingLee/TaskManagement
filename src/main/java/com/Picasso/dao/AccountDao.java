@@ -10,6 +10,9 @@ public interface AccountDao {
   @Select("SELECT * FROM account WHERE uid = #{uid}")
   Account findAccountById(@Param("uid") int uid);
 
+  @Select("select Max(uid) as id from account")
+  int findMaxId();
+
   @Select("SELECT * FROM account WHERE username = #{username}")
   Account findAccountByName(@Param("username") String username);
 
