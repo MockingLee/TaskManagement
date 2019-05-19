@@ -235,7 +235,7 @@ public class TestAPI {
   }
 
   @RequestMapping(value = "/changeTask", method = RequestMethod.POST)
-  public Map<String, Object> changeTask(@RequestBody Map<String, Object> request) {
+  public Map<String, Object> changeTask(@RequestBody Map<String, Object> request) throws ParseException {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
     Map<String, Object> msg = (Map<String, Object>) request.get("msg");
@@ -247,8 +247,16 @@ public class TestAPI {
         String content = (String) msg.get("content");
         Task task = taskService.selectTaskById(tid);
         if (task != null) {
-          Task task1 = taskService.changeTask(title, content, task.getInit_time(), task.getUpdate_time(),
-              task.getProcess(), tid);
+          Task task1;
+          Date update_time = task.getUpdate_time();
+          if (update_time != null) {
+            task1 = taskService.changeTask(title, content, task.getInit_time(), task.getUpdate_time(),
+                    task.getProcess(), tid);
+          } else {
+            Date date = datetime.parse("0000-00-00 00:00:00");
+            task1 = taskService.changeTask(title, content, task.getInit_time(), date,
+                    task.getProcess(), tid);
+          }
           if (task1 == null) {
             response.put("success", false);
             response.put("res", "error");
