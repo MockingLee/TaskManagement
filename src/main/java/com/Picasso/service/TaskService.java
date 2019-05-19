@@ -31,7 +31,9 @@ public class TaskService {
     public List<Task> selectAllTaskByUid(int uid) {
         List<Task> tasks = new ArrayList<>();
         for (UserTask userTask : userTaskDao.findTaskById(uid)) {
-            tasks.add(selectTaskById(userTask.getTid()));
+            Task task = selectTaskById(userTask.getTid());
+            if (task != null)
+                tasks.add(task);
         }
         return tasks;
     }

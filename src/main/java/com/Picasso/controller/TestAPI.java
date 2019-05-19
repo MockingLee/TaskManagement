@@ -71,7 +71,7 @@ public class TestAPI {
           Account account1 = userService.findAccountByUserName((String) msg.get("username"));
           res.put("success", true);
           res.put("msg", account1);
-          res.put("initPass", init_pass);
+          res.put("password", init_pass);
           // res.put("info", acc);
         }
       }
@@ -164,19 +164,11 @@ public class TestAPI {
         if (userinfo != null) {
           response.put("success", true);
         } else {
-          response.put("success", false);
-          response.put("res", "notfound");
+            response.put("success", false);
+            response.put("res", "error");
         }
-      } else {
-        response.put("success", false);
-        response.put("res", "weight");
-      }
-    } else {
-      response.put("success", false);
-      response.put("res", "error");
+        return response;
     }
-    return response;
-  }
 
   @RequestMapping(value = "/addTask", method = RequestMethod.POST)
   public Map<String, Object> addTask(@RequestBody Map<String, Object> request) {
@@ -363,34 +355,6 @@ public class TestAPI {
             userInfos.add(new UserInfo(account1.getUid(), null, null, null, null, 0, null));
           }
         }
-        response.put("msg", userInfos);
-      } else {
-        response.put("success", false);
-        response.put("res", "weight");
-      }
-    } else {
-      response.put("success", false);
-      response.put("res", "error");
-    }
-    return response;
-  }
-
-  @RequestMapping(value = "/getUser", method = RequestMethod.POST)
-  public Map<String, Object> getUser(@RequestBody Map<String, Object> request) {
-
-    Map<String, Object> response = new HashMap<>();
-    Map<String, Object> acc = (Map<String, Object>) request.get("info");
-    String s_uid = request.get("uid").toString();
-    Account account;
-    if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
-      if (account.getWeight() > 0) {
-        response.put("success", true);
-        List<Account> accountList = userService.selectAllAccountByWeight(0);
-        List<UserInfo> userInfos = new ArrayList<>();
-        UserInfo userinfo = userService.showUserInfo(Integer.parseInt(s_uid));
-        if (userinfo != null)
-          userInfos.add(userinfo);
-
         response.put("msg", userInfos);
       } else {
         response.put("success", false);
