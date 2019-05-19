@@ -325,3 +325,34 @@ Field | Description
   'res' : 'weight'
 }
 ```
+
+`/api/getUser`
+
+获取单个用户 by uid
+
+Field | Description
+------|------------
+**info** | 当前登录用户信息，即登录时接受的info字段
+**uid** | 查询的用户的uid
+**msg** | 返回当前查询的用户信息
+**res** | （可选）失败的原因 weight
+```javascript
+// 发送格式
+{
+  'info' : {uid : "100000" , username : "dzb", password : "123", weight : 0
+  'uid' : 100001} 
+}
+// 返回格式
+//success
+{
+  'success' : True ，
+  'msg' :[ 
+    {name, school, profession, phone, sex, birth},
+  ]
+}
+//fail
+{
+  'success' : False ,
+  'res' : 'weight'
+}
+```
