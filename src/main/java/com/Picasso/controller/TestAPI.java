@@ -253,7 +253,7 @@ public class TestAPI {
             task1 = taskService.changeTask(title, content, task.getInit_time(), task.getUpdate_time(),
                     task.getProcess(), tid);
           } else {
-            Date date = datetime.parse("0000-00-00 00:00:00");
+            Date date = new Date();
             task1 = taskService.changeTask(title, content, task.getInit_time(), date,
                     task.getProcess(), tid);
           }
