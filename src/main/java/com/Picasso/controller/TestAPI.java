@@ -71,6 +71,7 @@ public class TestAPI {
                     Account account1 = userService.findAccountByUserName((String) msg.get("username"));
                     res.put("success", true);
                     res.put("msg", account1);
+                    res.put("password", init_pass);
                     // res.put("info", acc);
                 }
             }
