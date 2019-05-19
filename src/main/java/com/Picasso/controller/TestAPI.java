@@ -155,7 +155,11 @@ public class TestAPI {
         String profession = (String) msg.get("profession");
         String phone = (String) msg.get("phone");
         int sex = Integer.valueOf((Integer) msg.get("sex"));
-        Date birth = birthday.parse((String) msg.get("birth"));
+        Date birth;
+        if (msg.get("birth") != null)
+          birth = birthday.parse((String) msg.get("birth"));
+        else
+          birth = birthday.parse("2000-01-01");
         UserInfo userinfo = userService.changeUserInfo(uid, name, school, profession, phone, sex, birth);
         if (userinfo != null) {
           response.put("success", true);
