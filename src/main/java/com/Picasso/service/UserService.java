@@ -5,7 +5,6 @@ import com.Picasso.dao.TaskDao;
 import com.Picasso.dao.UserInfoDao;
 import com.Picasso.dao.UserTaskDao;
 import com.Picasso.entity.Account;
-import com.Picasso.entity.Task;
 import com.Picasso.entity.UserInfo;
 import com.Picasso.entity.UserTask;
 import org.springframework.beans.factory.annotation.Autowired;
