@@ -1,9 +1,13 @@
 package com.Picasso.service;
 
 import com.Picasso.dao.AccountDao;
+import com.Picasso.dao.TaskDao;
 import com.Picasso.dao.UserInfoDao;
+import com.Picasso.dao.UserTaskDao;
 import com.Picasso.entity.Account;
+import com.Picasso.entity.Task;
 import com.Picasso.entity.UserInfo;
+import com.Picasso.entity.UserTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +22,12 @@ public class UserService {
 
     @Autowired
     private UserInfoDao userInfoDao;
+
+    @Autowired
+    private TaskDao taskDao;
+
+    @Autowired
+    private UserTaskDao userTaskDao;
 
     /**
      * 查找
@@ -120,6 +130,11 @@ public class UserService {
         if (accountDao.findAccountById(uid) != null) {
             if (userInfoDao.findUserById(uid) != null) {
                 userInfoDao.deleteUserInfo(uid);
+            }
+            List<UserTask> userTasks = userTaskDao.findTaskById(uid);
+            userTaskDao.deleteUserTaskByUid(uid);
+            for(UserTask userTask : userTasks){
+                taskDao.deleteTask(userTask.getTid());
             }
             accountDao.deleteAccount(uid);
             return true;
