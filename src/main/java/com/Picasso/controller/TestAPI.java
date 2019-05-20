@@ -281,7 +281,7 @@ public class TestAPI {
   public Map<String, Object> delTask(@RequestBody Map<String, Object> request) {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
-    int tid = Integer.valueOf((String) request.get("tid"));
+    int tid = Integer.valueOf(request.get("tid").toString());
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (taskService.selectUserTask(account.getUid(), tid) != null) {
