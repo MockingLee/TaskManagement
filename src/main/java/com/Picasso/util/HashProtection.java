@@ -32,7 +32,7 @@ public class HashProtection {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(sha1("123") + " " + sha1("123").length());
+		System.out.println(sha1("dzb"));
 		
 	}
 
