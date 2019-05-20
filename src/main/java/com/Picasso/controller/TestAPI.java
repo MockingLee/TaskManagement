@@ -91,7 +91,7 @@ public class TestAPI {
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (account.getWeight() > 0) {
-        boolean flag = userService.delAccount(Integer.valueOf((String) msg.get("uid")));
+        boolean flag = userService.delAccount(Integer.valueOf(msg.get("uid").toString()));
         if (flag) {
           response.put("success", true);
         } else {
