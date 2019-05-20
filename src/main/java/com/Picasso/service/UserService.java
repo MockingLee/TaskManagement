@@ -5,7 +5,6 @@ import com.Picasso.dao.TaskDao;
 import com.Picasso.dao.UserInfoDao;
 import com.Picasso.dao.UserTaskDao;
 import com.Picasso.entity.Account;
-import com.Picasso.entity.Task;
 import com.Picasso.entity.UserInfo;
 import com.Picasso.entity.UserTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +113,7 @@ public class UserService {
     public Account changPass(int uid, String newPass) {
         Account account = accountDao.findAccountById(uid);
         if (account != null) {
-            accountDao.updateAccount(account.getusername(), account.getPassword(), account.getWeight(), account.getUid());
+            accountDao.updateAccount(account.getusername(), newPass, account.getWeight(), account.getUid());
             return accountDao.findAccountById(uid);
         } else {
             return null;
@@ -133,7 +132,7 @@ public class UserService {
             }
             List<UserTask> userTasks = userTaskDao.findTaskById(uid);
             userTaskDao.deleteUserTaskByUid(uid);
-            for(UserTask userTask : userTasks){
+            for (UserTask userTask : userTasks) {
                 taskDao.deleteTask(userTask.getTid());
             }
             accountDao.deleteAccount(uid);
