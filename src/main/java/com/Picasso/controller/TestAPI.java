@@ -114,7 +114,7 @@ public class TestAPI {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
     Map<String, Object> msg = (Map<String, Object>) request.get("msg");
-    int uid = Integer.valueOf((String) request.get("uid"));
+    int uid = Integer.valueOf(request.get("uid").toString());
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (account.getWeight() > 0 || account.getUid() == uid) {
