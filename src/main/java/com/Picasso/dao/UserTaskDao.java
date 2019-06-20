@@ -17,4 +17,7 @@ public interface UserTaskDao {
 
     @Delete("DELETE from user_task WHERE tid = #{tid}")
     void deleteUserTask(@Param("tid") int tid);
+
+    @Delete("DELETE from user_task WHERE uid = #{uid}")
+    void deleteUserTaskByUid(@Param("uid") int uid);
 }

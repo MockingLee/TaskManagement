@@ -8,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.Picasso.dao")
 public class TaskManagementApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TaskManagementApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(TaskManagementApplication.class, args);
+
+  }
 
 }
