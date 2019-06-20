@@ -203,7 +203,7 @@ public class TestAPI {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
     Map<String, Object> msg = (Map<String, Object>) request.get("msg");
-    int tid = Integer.valueOf((String) request.get("tid"));
+    int tid = Integer.valueOf(request.get("tid").toString());
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (taskService.selectUserTask(account.getUid(), tid) != null) {
@@ -251,11 +251,16 @@ public class TestAPI {
           Date update_time = task.getUpdate_time();
           if (update_time != null) {
             task1 = taskService.changeTask(title, content, task.getInit_time(), task.getUpdate_time(),
-                    task.getProcess(), tid);
+                task.getProcess(), tid);
           } else {
+<<<<<<< HEAD
             Date date = new Date();
             task1 = taskService.changeTask(title, content, task.getInit_time(), date,
                     task.getProcess(), tid);
+=======
+            Date date = datetime.parse("0000-00-00 00:00:00");
+            task1 = taskService.changeTask(title, content, task.getInit_time(), date, task.getProcess(), tid);
+>>>>>>> 82d35b91fb6a92315ad394792026838eb2e1ad4f
           }
           if (task1 == null) {
             response.put("success", false);
