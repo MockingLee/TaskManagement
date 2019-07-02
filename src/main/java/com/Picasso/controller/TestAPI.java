@@ -253,8 +253,14 @@ public class TestAPI {
             task1 = taskService.changeTask(title, content, task.getInit_time(), task.getUpdate_time(),
                 task.getProcess(), tid);
           } else {
+<<<<<<< HEAD
+            Date date = new Date();
+            task1 = taskService.changeTask(title, content, task.getInit_time(), date,
+                    task.getProcess(), tid);
+=======
             Date date = datetime.parse("0000-00-00 00:00:00");
             task1 = taskService.changeTask(title, content, task.getInit_time(), date, task.getProcess(), tid);
+>>>>>>> 82d35b91fb6a92315ad394792026838eb2e1ad4f
           }
           if (task1 == null) {
             response.put("success", false);
