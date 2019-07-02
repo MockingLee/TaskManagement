@@ -95,22 +95,29 @@ public class TestAPI {
         if (flag) {
           response.put("success", true);
         } else {
-            response.put("success", false);
-            response.put("res", "error");
+          response.put("success", false);
+          response.put("res", "none");
         }
-        return response;
+      } else {
+        response.put("success", false);
+        response.put("res", "weight");
+      }
+    } else {
+      response.put("success", false);
+      response.put("res", "error");
     }
+    return response;
+  }
 
   @RequestMapping(value = "/changePass", method = RequestMethod.POST)
   public Map<String, Object> changePass(@RequestBody Map<String, Object> request) {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
     Map<String, Object> msg = (Map<String, Object>) request.get("msg");
-    int uid = Integer.valueOf(request.get("uid").toString());
+    int uid = Integer.valueOf((String) request.get("uid"));
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (account.getWeight() > 0 || account.getUid() == uid) {
-        System.out.println("newpassword: " + msg.get("password").toString());
         Account newaccount = userService.changPass(uid, HashProtection.sha1((String) msg.get("password")));
         if (newaccount != null) {
           response.put("success", true);
@@ -274,7 +281,7 @@ public class TestAPI {
   public Map<String, Object> delTask(@RequestBody Map<String, Object> request) {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> acc = (Map<String, Object>) request.get("info");
-    int tid = Integer.valueOf(request.get("tid").toString());
+    int tid = Integer.valueOf((String) request.get("tid"));
     Account account;
     if ((account = userService.checkAccount((String) acc.get("username"), (String) acc.get("password"))) != null) {
       if (taskService.selectUserTask(account.getUid(), tid) != null) {
